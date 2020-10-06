@@ -1,4 +1,4 @@
-<%- include("./components/_header") -%>
+<%- include("./components/_header",{valueCart:valueCart}) -%>
 
 <style>
     .btn {
@@ -9,6 +9,12 @@
       background-color: darkviolet;
     }
 </style>
+
+<script>
+    function addInCart(productId) {
+
+    }
+</script>
 <% for(let product of products) { 
     let value = product.Value.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})
 %>
@@ -19,7 +25,7 @@
             <div class="row">
                 <p class="col"><span class=''><%= value %> </span></p>
                 <div>
-                    <button class='col btn btn-dark'><i class="material-icons">add_shopping_cart</i></button>
+                    <a href="/add_in_cart?id=<%= product.id %>" class='col btn btn-dark'><i class="material-icons">add_shopping_cart</i></a>
                 </div>
              </div>
         </div>
