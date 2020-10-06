@@ -15,8 +15,12 @@
         <img class="card-img-top rounded" src="/img/product/<%=product.Img%>" alt="Card image">
         <div class="card-body">
             <h5 class="card-title"><span class=''><%= product.Title %></span></h5>
-            <p class="card-text"><span class=''><%= value %> </span></p>
-            <button class='btn btn-dark'><i class="material-icons">add_shopping_cart</i></button>
+            <div class="row">
+                <p class="col"><span class=''><%= value %> </span></p>
+                <div>
+                    <button class='col btn btn-dark'><i class="material-icons">add_shopping_cart</i></button>
+                </div>
+             </div>
         </div>
     </div>
 
