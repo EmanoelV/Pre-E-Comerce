@@ -1,0 +1,26 @@
+<%- include("./components/_header") -%>
+
+<style>
+    .btn {
+        box-shadow: 1px 1px 15px darkviolet;
+    }
+    .body {
+      background-color: darkviolet;
+    }
+</style>
+<% for(let product of products) { 
+    let value = product.Value.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})
+%>
+    <div class="card bg-dark text-white rounded p-2 mt-3">
+        <img class="card-img-top rounded" src="/img/product/<%=product.Img%>" alt="Card image">
+        <div class="card-body">
+            <h5 class="card-title"><span class=''><%= product.Title %></span></h5>
+            <p class="card-text"><span class=''><%= value %> </span></p>
+            <button class='btn btn-dark'><i class="material-icons">add_shopping_cart</i></button>
+        </div>
+    </div>
+
+<% } %> 
+
+
+<%- include("./components/_footer") -%>

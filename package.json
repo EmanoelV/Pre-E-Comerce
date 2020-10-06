@@ -1,0 +1,37 @@
+{
+  "name": "example_shopping_cart",
+  "version": "1.0.0",
+  "description": "Um exemplo simples do funcionamento de um carrinho de compras",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "nodemon ./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EmanoelV/example-shopping-cart.git"
+  },
+  "keywords": [
+    "cart",
+    "shopping",
+    "example",
+    "crud"
+  ],
+  "author": "Emanoel S. Vieira",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/EmanoelV/example-shopping-cart/issues"
+  },
+  "homepage": "https://github.com/EmanoelV/example-shopping-cart#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "multer": "^1.4.2",
+    "path": "^0.12.7",
+    "sqlite3": "^5.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
