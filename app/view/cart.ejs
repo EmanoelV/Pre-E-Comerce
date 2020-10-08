@@ -18,19 +18,6 @@
 <% for(let product of products) { 
     let value = product.Value.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})
 %>
-    <script>
-        function addInCart(productId) {
-            fetch(`add_in_cart?id=${productId}`,{method: 'POST'})
-                .then((resp) => {
-                    if(resp.ok) {
-                        let valueCart = document.querySelector('#number-cart')
-                        valueCart.innerText = parseInt(valueCart.innerText.trim())+1
-                    }
-                })
-        }
-            
-    </script>
-
     <div class="card bg-dark text-white rounded p-2 mt-3">
         <img class="card-img-top rounded" src="/img/product/<%=product.Img%>" alt="Card image">
         <div class="card-body">
@@ -38,13 +25,13 @@
             <div class="row">
                 <p class="col"><span class=''><%= value %> </span></p>
                 <div>
-                    <button onclick="addInCart('<%= product.id %>')" class='col btn btn-dark'>
-                        <i class="material-icons">add_shopping_cart</i>
-                    </button>
+                    <a href="/add_in_cart?id=<%= product.id %>" class='col btn btn-dark'><i class="material-icons">add_shopping_cart</i></a>
                 </div>
              </div>
         </div>
     </div>
+
+    <a class="btn btn-dark mt-3" href="/clear-cart" >Limpar Carrinho</a>
 
 <% } %> 
 
