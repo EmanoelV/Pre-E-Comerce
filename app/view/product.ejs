@@ -7,46 +7,57 @@
 
     .body {
       background-color: darkviolet;
+      height: min-content;
+    }
+
+    .grid-item {
+        width: 50%;
+        height: min-content;
+    }
+
+    .prod > img {
+        max-width: 100%;
+        height: auto;
     }
 </style>
 
 <script>
     function addInCart(productId) {
-
-    }
+        fetch(`add_in_cart?id=${productId}`,{method: 'POST'})
+            .then((resp) => {
+                if(resp.ok) {
+                    let valueCart = document.querySelector('#number-cart')
+                    valueCart.innerText = parseInt(valueCart.innerText.trim())+1
+                }
+            })
+    }     
 </script>
-<% for(let product of products) { 
-    let value = product.Value.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})
-%>
-    <script>
-        function addInCart(productId) {
-            fetch(`add_in_cart?id=${productId}`,{method: 'POST'})
-                .then((resp) => {
-                    if(resp.ok) {
-                        let valueCart = document.querySelector('#number-cart')
-                        valueCart.innerText = parseInt(valueCart.innerText.trim())+1
-                    }
-                })
-        }
-            
-    </script>
+<script src="/js/masonary.js"></script>
 
-    <div class="card bg-dark text-white rounded p-2 mt-3">
-        <img class="card-img-top rounded" src="/img/product/<%=product.Img%>" alt="Card image">
-        <div class="card-body">
-            <h5 class="card-title"><span class=''><%= product.Title %></span></h5>
-            <div class="row">
-                <p class="col"><span class=''><%= value %> </span></p>
-                <div>
-                    <button onclick="addInCart('<%= product.id %>')" class='col btn btn-dark'>
-                        <i class="material-icons">add_shopping_cart</i>
-                    </button>
+    <div class="grid" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 0 }'>
+<% for(let i in products) { 
+    let value = products[i].Value.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})
+%>
+    <div class='grid-item p-2'>
+        <div class="prod card bg-dark text-white rounded p-2">
+            <img class="card-img-top rounded" src="/img/product/<%=products[i].Img%>" alt="Card image">
+            <div class="card-body">
+                <h5 class="card-title"><span class=''><%= products[i].Title %></span></h5>
+                <div class="row">
+                    <p class="col"><span class=''><%= value %> </span></p>
+                    <div>
+                        <button onclick="addInCart('<%= products[i].id %>')" class='col btn btn-dark'>
+                            <i class="material-icons">add_shopping_cart</i>
+                        </button>
+                    </div>
                 </div>
-             </div>
-        </div>
+            </div>
+        </div>        
     </div>
 
-<% } %> 
+
+<% } %>
+</div>
 
 
 <%- include("./components/_footer") -%>
