@@ -8,6 +8,10 @@
     .body {
       background-color: darkviolet;
     }
+
+    img {
+        width: 100%;
+    }
 </style>
 
 <script>
@@ -18,22 +22,37 @@
 <% for(let product of products) { 
     let value = product.Value.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})
 %>
-    <div class="card bg-dark text-white rounded p-2 mt-3">
-        <img class="card-img-top rounded" src="/img/product/<%=product.Img%>" alt="Card image">
-        <div class="card-body">
-            <h5 class="card-title"><span class=''><%= product.Title %></span></h5>
-            <div class="row">
-                <p class="col"><span class=''><%= value %> </span></p>
-                <div>
-                    <a href="/add_in_cart?id=<%= product.id %>" class='col btn btn-dark'><i class="material-icons">add_shopping_cart</i></a>
+<div class="card mt-3 bg-dark text-white">
+    <div class="row no-gutters">
+        <div class="p-2 rounded col-md-2">
+            <img src="/img/product/<%= product.Img %>">
+        </div>
+
+        <div class="col-md-8">
+            <div class="card-body te">
+                <h5 class="card-title"><%= product.Title %></h5>
+                <p class="card-text"><%= product.Value.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) %></p>
+                        
+
+                <div class="d-flex justify-content-between" >
+                <a href="#" class="btn btn-danger align-self-center"  style="height: min-content;">Delete</a><form>
+                    <form class="p-3 mt-3 align-self-center" style="height: min-content;">
+                        <div class="form-inline ml-3">
+                            <label for="quantidade">Quantidade: &nbsp;&nbsp;</label>
+                            <input type="email" class="form-control" style="width: 30%;" id="quantidade">
+                        </div>                    
+                    </form>                
                 </div>
-             </div>
+
+
+            </div>
         </div>
     </div>
+</div>
 
-    <a class="btn btn-dark mt-3" href="/clear-cart" >Limpar Carrinho</a>
+    
 
 <% } %> 
-
+<a class="btn btn-dark mt-3" href="/clear-cart" >Limpar Carrinho</a>
 
 <%- include("./components/_footer") -%>

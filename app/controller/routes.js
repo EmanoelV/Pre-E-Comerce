@@ -5,7 +5,7 @@ const saveProduct = require('../model/saveProduct')
 const multer = require('../model/multer')
 const getProducts = require('../model/getAllProducts')
 const addInCart = require('../model/addInCart')
-const countInCart = require('../view/components/countInCart')
+const countInCart = require('../model/countInCart')
 const getOneProducts = require('../model/getOneProduct')
 const getAllInCart = require('../model/getAllInCart')
 
