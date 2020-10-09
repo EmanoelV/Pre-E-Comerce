@@ -33,8 +33,9 @@
     }     
 </script>
 <script src="/js/masonary.js"></script>
+<script src="/js/imgLoaded.js"></script>
 
-    <div class="grid" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 0 }'>
+    <div class="grid">
 <% for(let i in products) { 
     let value = products[i].Value.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})
 %>
@@ -58,6 +59,18 @@
 
 <% } %>
 </div>
+
+<script>
+    $(window).on("load", function(){
+        // página totalmente carregada (DOM, imagens etc.)
+        console.log('ok')
+        $('.grid').masonry({
+            // options
+            itemSelector: '.grid-item',
+            columnWidth: 0
+        });
+    })
+</script>
 
 
 <%- include("./components/_footer") -%>
