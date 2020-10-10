@@ -19,6 +19,8 @@
 
     }
 </script>
+
+<form></form>
 <% for(let product of products) { 
     let value = product.Value.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})
 %>
@@ -36,12 +38,12 @@
 
                 <div class="d-flex justify-content-between" >
                 <a href="#" class="btn btn-danger align-self-center"  style="height: min-content;">Delete</a><form>
-                    <form class="p-3 mt-3 align-self-center" style="height: min-content;">
+                    
                         <div class="form-inline ml-3">
                             <label for="quantidade">Quantidade: &nbsp;&nbsp;</label>
-                            <input type="email" class="form-control" style="width: 30%;" id="quantidade">
+                            <input value="1" type="number" class="form-control" style="width: 30%;" id="quantidade">
                         </div>                    
-                    </form>                
+                                    
                 </div>
 
 
@@ -53,6 +55,7 @@
     
 
 <% } %> 
+</form>
 <a class="btn btn-dark mt-3" href="/clear-cart" >Limpar Carrinho</a>
 
 <%- include("./components/_footer") -%>
