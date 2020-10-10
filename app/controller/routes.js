@@ -45,8 +45,15 @@ routes.get('/clear-cart', (req,res) => {
 
 //POST
 routes.post('/add_in_cart', async (req,res) => {
-    await addInCart(db, req.query.id)
-    res.end()
+    try {
+        await addInCart(db, req.query.id)
+        res.end()
+    } catch (error) {
+        //console.log(">>>",error)
+        res.status(500).end()
+    }
+    
+    
 })
 
 routes.post('/admin', multer.single('Img'), (req,res) => {

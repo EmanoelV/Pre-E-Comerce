@@ -25,10 +25,13 @@
     function addInCart(productId) {
         fetch(`add_in_cart?id=${productId}`,{method: 'POST'})
             .then((resp) => {
+                console.log(resp.ok)
                 if(resp.ok) {
                     let valueCart = document.querySelector('#number-cart')
                     valueCart.innerText = parseInt(valueCart.innerText.trim())+1
-                }
+                } else {
+                    alert("Este roduto já está no carrinho")
+                }  
             })
     }     
 </script>
@@ -63,7 +66,6 @@
 <script>
     $(window).on("load", function(){
         // página totalmente carregada (DOM, imagens etc.)
-        console.log('ok')
         $('.grid').masonry({
             // options
             itemSelector: '.grid-item',

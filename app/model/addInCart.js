@@ -1,10 +1,14 @@
 module.exports = function addInCart(db, productId) {
     let query = `INSERT INTO Cart (ProductId) VALUES ("${productId}");`
 
-    db.run(query, (err) => {
-        if(err) {
-            return console.error(err.message)
-        }
-        console.log('Produto salvo')
-    })
+    const load = (resolve, reject) => {
+        db.all(query, [], (err,data) => {
+            if(err) {
+                reject(err)
+            }
+            resolve()
+        })
+    }
+
+    return new Promise(load)
 }
