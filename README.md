@@ -1,5 +1,8 @@
 # Pré E-Comerce
-Um exemplo básico de um E-Commerce
+Um exemplo limpo de código base para um E-Commerce feito em Node.js, SQLITE, Html e Css
+
+libs/frameworks:
+- Bootstrap4, Express, Multer
 
 ## Como Iniciar
 - Tenha o Node.js 12.x instalado em sua máquina junto ao NPM mais atual.
