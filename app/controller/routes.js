@@ -8,6 +8,7 @@ const addInCart = require('../model/addInCart')
 const countInCart = require('../model/countInCart')
 const getOneProducts = require('../model/getOneProduct')
 const getAllInCart = require('../model/getAllInCart')
+const clearCart = require('../model/clear-cart')
 
 //GET
 routes.get('/', async (req,res) => {
@@ -36,8 +37,8 @@ routes.get('/cart', async (req,res) => {
 })
 
 routes.get('/clear-cart', (req,res) => {
-    //"DELETE FROM produtos VACUUM"
-    res.send('em desenvolvimento, paciencia')
+    clearCart(db)
+    res.redirect('cart')
 })
 
 
