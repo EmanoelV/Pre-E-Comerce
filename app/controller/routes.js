@@ -4,27 +4,33 @@ const db = require('../model/initDB')
 const saveProduct = require('../model/saveProduct')
 const multer = require('../model/multer')
 const getProducts = require('../model/getAllProducts')
-const addInCart = require('../model/addInCart')
-const countInCart = require('../model/countInCart')
+//const addInCart = require('../model/addInCart')
+//const countInCart = require('../model/countInCart')
 const getOneProducts = require('../model/getOneProduct')
-const getAllInCart = require('../model/getAllInCart')
-const clearCart = require('../model/clear-cart')
+//const getAllInCart = require('../model/getAllInCart')
+//const clearCart = require('../model/clear-cart')
+const Cart = require('../model/cart')
+const cart = new Cart(db)
+
 
 //GET
 routes.get('/', async (req,res) => {
-    let valueCart = await countInCart(db)
+    let valueCart = await cart.count()
+    valueCart = valueCart[0]['COUNT(ProductId)']
     let products = await getProducts(db)
     res.render('product',{products: products, valueCart})
 })
 
 routes.get('/admin', async (req,res) => {
-    let valueCart = await countInCart(db)
+    let valueCart = await cart.count()
+    valueCart = valueCart[0]['COUNT(ProductId)']
     res.render('productForm', {valueCart})
 })
 
 routes.get('/cart', async (req,res) => {
-    let productIds = await getAllInCart(db)
-    let valueCart = await countInCart(db)
+    let productIds = await cart.readAll()
+    let valueCart = await cart.count()
+    valueCart = valueCart[0]['COUNT(ProductId)']
     let productsInCart = []
 
     for (const key in productIds) {
@@ -37,7 +43,7 @@ routes.get('/cart', async (req,res) => {
 })
 
 routes.get('/clear-cart', (req,res) => {
-    clearCart(db)
+    cart.clear()
     res.redirect('cart')
 })
 
@@ -46,10 +52,10 @@ routes.get('/clear-cart', (req,res) => {
 //POST
 routes.post('/add_in_cart', async (req,res) => {
     try {
-        await addInCart(db, req.query.id)
+        await cart.add(req.query.id)
         res.end()
     } catch (error) {
-        //console.log(">>>",error)
+        console.error(error)
         res.status(500).end()
     }
     
