@@ -1,41 +1,34 @@
 const express = require('express')
 const routes = express.Router()
 const db = require('../model/initDB')
-const saveProduct = require('../model/saveProduct')
 const multer = require('../model/multer')
-const getProducts = require('../model/getAllProducts')
-//const addInCart = require('../model/addInCart')
-//const countInCart = require('../model/countInCart')
-const getOneProducts = require('../model/getOneProduct')
-//const getAllInCart = require('../model/getAllInCart')
-//const clearCart = require('../model/clear-cart')
 const Cart = require('../model/cart')
+const Product = require('../model/product')
+
+const product = new Product(db)
 const cart = new Cart(db)
 
 
 //GET
 routes.get('/', async (req,res) => {
     let valueCart = await cart.count()
-    valueCart = valueCart[0]['COUNT(ProductId)']
-    let products = await getProducts(db)
+    let products = await product.readAll()
     res.render('product',{products: products, valueCart})
 })
 
 routes.get('/admin', async (req,res) => {
     let valueCart = await cart.count()
-    valueCart = valueCart[0]['COUNT(ProductId)']
     res.render('productForm', {valueCart})
 })
 
 routes.get('/cart', async (req,res) => {
     let productIds = await cart.readAll()
     let valueCart = await cart.count()
-    valueCart = valueCart[0]['COUNT(ProductId)']
     let productsInCart = []
 
     for (const key in productIds) {
         if (productIds.hasOwnProperty(key)) {
-            productsInCart.push(await getOneProducts(db,productIds[key].ProductId))
+            productsInCart.push(await product.read(productIds[key].ProductId))
         }
     }
 
@@ -66,7 +59,7 @@ routes.post('/admin', multer.single('Img'), (req,res) => {
     if(req.file) {
         console.log("Imagem armazenada")
         req.body.Img = req.file.filename
-        saveProduct(db,req.body)
+        product.create(req.body)
         return res.redirect('/admin')
     }
     
