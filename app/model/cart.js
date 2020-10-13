@@ -25,6 +25,11 @@ class Cart extends LoadQuery {
         this.query = `SELECT * FROM Cart;`
         return new Promise(this.load)
     }
+
+    remove(id) {
+        this.query = `DELETE FROM Cart WHERE ProductId = ${id}; VACUUM;`
+        return new Promise(this.load)
+    }
 }
 
 module.exports = Cart

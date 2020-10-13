@@ -55,6 +55,11 @@ routes.post('/add_in_cart', async (req,res) => {
     
 })
 
+routes.post('/remove-cart', async (req,res) => {
+    await cart.remove(req.body.id)
+    res.redirect('cart')
+})
+
 routes.post('/admin', multer.single('Img'), (req,res) => {
     if(req.file) {
         console.log("Imagem armazenada")
